@@ -468,14 +468,6 @@ rf_final %>% collect_metrics()  # Accuracy: 0.506 mAUC: 0.747
 svm_final %>% collect_metrics() # Accuracy: 0.561 mAUC: 0.728
 xgb_final %>% collect_metrics() # Accuracy: 0.482 mAUC: 0.728
 
-#
-log_final %>%
-  collect_predictions() %>%
-  mutate(correct = case_when(medical_specialty = .pred_class ~ "Correct",
-                             TRUE ~ "Incorrect")) %>%
-  bind_cols(ml_test)
-  
-
 # Feature Importances
 final_logreg %>%
   set_engine("glmnet", importance = "permutation") %>%
